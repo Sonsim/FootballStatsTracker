@@ -1,4 +1,6 @@
-namespace FootballStatsTrackerBackend
+using Microsoft.EntityFrameworkCore;
+using FootballStatsTrackerAPI.Model;
+namespace FootballStatsTrackerAPI
 {
     public class Program
     {
