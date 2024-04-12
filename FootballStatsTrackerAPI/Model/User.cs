@@ -1,13 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace FootballStatsTrackerAPI.Model
 {
     public class User
     {
-        public string UserName { get; private set; }
         [Required]
-        public string FavoriteTeam { get; set; }
-        public int ID { get; private set; }
-        public string _passwordHash { get; private set; }
+        [Key]
+        public string username { get;  set; }
+        
+        public string team { get; set; }
+        [Required]
+        public string passwordhash { get;  set; }
+
     }
 }

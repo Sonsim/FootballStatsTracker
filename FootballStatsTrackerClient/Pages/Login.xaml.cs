@@ -25,9 +25,11 @@ namespace FootballStatsTrackerClient.Pages
             InitializeComponent();
         }
 
-        private void toRegisterBtn_Click(object sender, RoutedEventArgs e)
+        private void ToRegisterBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Register());
         }
+
+        
     }
 }

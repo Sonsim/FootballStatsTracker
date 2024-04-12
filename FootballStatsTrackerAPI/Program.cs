@@ -1,5 +1,8 @@
+using FootballStatsTrackerAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using FootballStatsTrackerAPI.Model;
+
+
 namespace FootballStatsTrackerAPI
 {
     public class Program
@@ -7,14 +10,16 @@ namespace FootballStatsTrackerAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var config = builder.Configuration;
 
-            // Add services to the container.
 
+            builder.Services.AddDbContext<AppDbContext>(opt =>
+                opt.UseNpgsql(config.GetConnectionString("DefaultConnection")));
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,6 +35,7 @@ namespace FootballStatsTrackerAPI
 
 
             app.MapControllers();
+            
 
             app.Run();
         }

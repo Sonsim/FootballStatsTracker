@@ -40,7 +40,8 @@
                 <TextBlock Text="Brukernavn" 
                    Grid.Row="0"
                    Margin="0,15"
-                   HorizontalAlignment="Left"/>
+                   HorizontalAlignment="Left"
+                   Name="Username"/>
                 <TextBox  Grid.Column="1"
                   Grid.Row="1"
                   Padding="0,5"
@@ -51,7 +52,8 @@
                 <TextBlock Text="Passord" 
                    Grid.Row="2"
                    Margin="0,15"
-                   HorizontalAlignment="Left"/>
+                   HorizontalAlignment="Left"
+                   Name="Password"/>
                 <PasswordBox Grid.Row="3"
                       Password=""
                       Padding="0,5"                           
@@ -97,7 +99,7 @@
                     Margin="0,10"
                     Height="35"
                     Width="150"
-                    Click="toRegisterBtn_Click">
+                    Click="ToRegisterBtn_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">

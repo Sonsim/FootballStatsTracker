@@ -36,11 +36,18 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/> 
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                <TextBlock x:Name="errorMessage"
+                           OpacityMask="Crimson"
+                           Foreground="Red"
+                           Grid.Row="0"
+                           HorizontalAlignment="Center"
+                           FontWeight="Bold"/> 
                 <TextBlock Text="Brukernavn" 
                Grid.Row="0"
                Margin="0,15"
@@ -51,7 +58,8 @@
               Width="255"
               BorderThickness="0,0,0,1"
               HorizontalAlignment="Left"
-              Text=""/>
+              Text=""
+              Name="Register_Username"/>
                 <TextBlock Text="Favoritt lag" 
                            Grid.Row="2"
                            Margin="0,15"
@@ -63,7 +71,9 @@
                           Width="255"
                           BorderThickness="0,0,0,1"
                           HorizontalAlignment="Left"
-                          Text=""/>
+                          Name="Club"
+                          Text=""
+                          />
                 <TextBlock Text="Passord" 
                Grid.Row="4"
                Margin="0,15"
@@ -73,7 +83,8 @@
                   Padding="0,5"                           
                   Width="255"
                   BorderThickness="0,0,0,1"
-                  HorizontalAlignment="Left"/>
+                  HorizontalAlignment="Left"
+                  Name="Register_Password"/>
                 <TextBlock Text="Gjenta Passord" 
                            Grid.Row="6"
                            Margin="0,15"
@@ -83,7 +94,8 @@
                              Padding="0,5"                           
                              Width="255"
                              BorderThickness="0,0,0,1"
-                             HorizontalAlignment="Left"/>
+                             HorizontalAlignment="Left"
+                             Name="Repeat_Password"/>
             </Grid>
 
             <Button x:Name="RegisterBtn" 
@@ -92,7 +104,8 @@
                 Background="#114387"
                 Height="35"
                 Width="150"
-                Margin="0,5,0,0">
+                Margin="0,5,0,0"
+                Click="RegisterBtn_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">

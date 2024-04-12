@@ -1,6 +1,7 @@
 ﻿using FootballStatsTrackerAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FootballStatsTrackerAPI
 {
@@ -15,10 +16,10 @@ namespace FootballStatsTrackerAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //Database connectino with PostgreSQL
+            
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
-
+            
             services.AddControllers();
         }
     }

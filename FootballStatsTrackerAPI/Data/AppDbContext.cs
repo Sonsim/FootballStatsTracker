@@ -9,6 +9,7 @@ namespace FootballStatsTrackerAPI.Data
         {
 
         }
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> users { get; set; }
+        public DbSet<Teams> teams { get; set; }
     }
 }

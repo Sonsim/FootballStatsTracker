@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FootballStatsTrackerClient.Model;
 
 namespace FootballStatsTrackerClient
 {
@@ -22,6 +23,7 @@ namespace FootballStatsTrackerClient
     {
         public MainWindow()
         {
+           
             InitializeComponent();
         }
     }

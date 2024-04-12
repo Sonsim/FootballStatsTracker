@@ -4,11 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FootballStatsTrackerClient.Pages"
+      xmlns:user="clr-namespace.FootballStatsTrackerClient.Globals"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Hovedside">
-
-    <Grid>
-        
-    </Grid>
+    <Border>
+        <Grid Background="{Binding }">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Text="{Binding }"/>
+        </Grid>
+    </Border>
 </Page>
