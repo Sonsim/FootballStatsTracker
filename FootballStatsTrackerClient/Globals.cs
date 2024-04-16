@@ -11,12 +11,13 @@ namespace FootballStatsTrackerClient
 {
     public static class Globals
     {
+        
         public static List<Team> teamsList = new List<Team>()
         {
             
         };
 
-        public static string LoggedInUser { get; set; }
+        public static User LoggedInUser { get; set; }
 
        
         public static async Task<object> FillList()

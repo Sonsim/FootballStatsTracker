@@ -7,14 +7,26 @@
       xmlns:user="clr-namespace.FootballStatsTrackerClient.Globals"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Background="{Binding homemaincolor}"
+      Foreground="{Binding homesecondcolor}"
       Title="Hovedside">
-    <Border>
-        <Grid Background="{Binding }">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"
-                       Text="{Binding }"/>
-        </Grid>
-    </Border>
+<Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <TextBlock HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Grid.Row="0"
+               Text="Hei"/>
+    <Button 
+            Content="Endre farger" 
+            Grid.Row="1"
+            Foreground="{Binding awaysecondcolor}"
+            Background="{Binding awaymaincolor}"
+            Height="35"
+            Width="150"
+            Margin="0,5,0,0"
+            Click="AlterTheme_Click"> </Button>
+    </Grid>
 </Page>

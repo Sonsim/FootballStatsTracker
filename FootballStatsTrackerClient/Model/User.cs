@@ -18,6 +18,7 @@ namespace FootballStatsTrackerClient.Model
             team = teamobject;
             passwordhash = password;
         }
-     
+
+        
     }
 }

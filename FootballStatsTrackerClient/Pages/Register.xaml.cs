@@ -26,7 +26,8 @@ namespace FootballStatsTrackerClient.Pages
         
         {
             InitializeComponent();
-            DataContext = Globals.teamsList;
+            List<Team> teams = Globals.teamsList;
+            listBoxTeams.ItemsSource = teams;
         }
 
         private void BackToLoginBtn_Click(object sender, RoutedEventArgs e)
@@ -35,29 +36,13 @@ namespace FootballStatsTrackerClient.Pages
         }
 
         
-
-        private string  GetTeamName()
-        {
-            string name = Club.Text;
-
-            for (int i = 0; i < Globals.teamsList.Count; i++)
-            {
-                if (Globals.teamsList[i].teamname.ToLower().Contains(name.ToLower()))
-                {
-                    return Globals.teamsList[i].teamname;
-                }
-            }
-
-            return String.Empty;
-        }
-
         private Team GetTeam()
         {
-            string name = Club.Text;
+            var selectedListBoxItems = ((Team)listBoxTeams.SelectedItem).teamname;
 
             for (int i = 0; i < Globals.teamsList.Count; i++)
             {
-                if (Globals.teamsList[i].teamname.ToLower().Contains(name.ToLower()))
+                if (Globals.teamsList[i].teamname.ToLower().Contains(selectedListBoxItems.ToLower()))
                 {
                     return Globals.teamsList[i];
                 }
@@ -65,61 +50,63 @@ namespace FootballStatsTrackerClient.Pages
 
             return null;
         }
-        private async void RegisterBtn_Click(Object sender, RoutedEventArgs e)
-        {
-            if (Register_Username.Text.Length == 0)
-            {
-                
-                errorMessage.Text= "Vennligst skriv inn et brukernavn";
-                
-            }
-            else
-            {
-                string username = Register_Username.Text;
-                string teamname = GetTeamName();
-                string password = Register_Password.Password;
-                Team club = GetTeam();
-                if (Register_Password.Password.Length == 0)
-                {
-                    errorMessage.Text = "Skriv et passord";
-                    
-                }
-                else if(Register_Password.Password != Repeat_Password.Password)
-                {
-                    errorMessage.Text = "Passordet matcher ikke";
-                    
-                }
-                else
-                {
-                     User newuser = new User(username,  password, club.teamname);
-                     
-                     
-                     string jsonUser = JsonSerializer.Serialize(newuser);
+        
+         private async void RegisterBtn_Click(Object sender, RoutedEventArgs e)
+         {
+             if (Register_Username.Text.Length == 0)
+             {
 
-                    HttpClient client = new HttpClient();
-                    HttpContent content = new StringContent(jsonUser, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response =
-                        await client.PostAsync("https://localhost:7137/create-user", content);
+                 errorMessage.Text= "Vennligst skriv inn et brukernavn";
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        Globals.LoggedInUser = username;
-                        this.NavigationService.Navigate(new Mainpage());
-                    }
-                    else
-                    {
-                        
-                        string messageBoxText = "Feil ved innlogging";
-                        string caption = "Feil!";
-                        MessageBoxButton button = MessageBoxButton.YesNoCancel;
-                        MessageBoxImage icon = MessageBoxImage.Warning;
-                        MessageBoxResult result;
+             }
+             else
+             {
+                 string username = Register_Username.Text;
+                 string teamname = ((Team)listBoxTeams.SelectedItem).teamname;
+                 string password = Register_Password.Password;
+                 Team club = GetTeam();
+                 if (Register_Password.Password.Length == 0)
+                 {
+                     errorMessage.Text = "Skriv et passord";
 
-                        result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-                    }
+                 }
+                 else if(Register_Password.Password != Repeat_Password.Password)
+                 {
+                     errorMessage.Text = "Passordet matcher ikke";
 
-                }
-            } 
-        }
+                 }
+                 else
+                 {
+                      User newuser = new User(username,  password, teamname);
+
+
+                      string jsonUser = JsonSerializer.Serialize(newuser);
+
+                     HttpClient client = new HttpClient();
+                     HttpContent content = new StringContent(jsonUser, Encoding.UTF8, "application/json");
+                     HttpResponseMessage response =
+                         await client.PostAsync("https://localhost:7137/create-user", content);
+
+                     if (response.IsSuccessStatusCode)
+                     {
+                         Globals.LoggedInUser = newuser;
+                         this.NavigationService.Navigate(new Mainpage());
+                     }
+                     else
+                     {
+
+                         string messageBoxText = "Feil ved innlogging";
+                         string caption = "Feil!";
+                         MessageBoxButton button = MessageBoxButton.YesNoCancel;
+                         MessageBoxImage icon = MessageBoxImage.Warning;
+                         MessageBoxResult result;
+
+                         result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                     }
+
+                 }
+
+             }
+         } 
     }
 }
