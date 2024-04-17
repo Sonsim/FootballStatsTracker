@@ -44,7 +44,7 @@ namespace FootballStatsTrackerClient.Pages
                if (team.teamname.ToLower() == LoggedIn.team.ToLower())
                {
                    LoggedTeam = team;
-                   this.DataContext = team;
+                   DataContext = team;
                }
            }
         }
@@ -56,6 +56,7 @@ namespace FootballStatsTrackerClient.Pages
             {
                 this.Background = (Brush)converter.ConvertFromString(LoggedTeam.awaymaincolor);
                 this.Foreground = (Brush)converter.ConvertFromString(LoggedTeam.awaysecondcolor);
+                
             }
             else
             {

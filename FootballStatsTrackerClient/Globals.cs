@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using FootballStatsTrackerClient.Model;
+using System.Security.Cryptography;
 
 namespace FootballStatsTrackerClient
 {
@@ -43,6 +44,25 @@ namespace FootballStatsTrackerClient
             {
                 return null;
             }
+        }
+
+        public static string HashPassword(string password, byte[] salt)
+        {
+            using (var algorithm = new Rfc2898DeriveBytes(password, salt, 10000))
+            {
+                byte[] hash = algorithm.GetBytes(32);
+                return Convert.ToBase64String(hash);
+            }
+        }
+
+        public static byte[] GenerateSalt()
+        {
+            byte[] salt = new byte[16];
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetNonZeroBytes(salt);
+            }
+            return salt;
         }
     }
 }

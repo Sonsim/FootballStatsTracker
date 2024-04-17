@@ -63,7 +63,9 @@ namespace FootballStatsTrackerClient.Pages
              {
                  string username = Register_Username.Text;
                  string teamname = ((Team)listBoxTeams.SelectedItem).teamname;
-                 string password = Register_Password.Password;
+                 string passwordtext = Register_Password.Password;
+                 var salt = Globals.GenerateSalt();
+                 var password = Globals.HashPassword(passwordtext, salt);
                  Team club = GetTeam();
                  if (Register_Password.Password.Length == 0)
                  {

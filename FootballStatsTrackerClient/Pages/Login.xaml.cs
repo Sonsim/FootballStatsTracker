@@ -30,6 +30,13 @@ namespace FootballStatsTrackerClient.Pages
             this.NavigationService.Navigate(new Register());
         }
 
+        public void LoginUser()
+        {
+            string username = usernameInput.Text;
+            string passwordinput = passwordInput.Password;
+            byte[] salt = Globals.GenerateSalt();
+            var password = Globals.HashPassword(passwordinput, salt);
+        }
         
     }
 }

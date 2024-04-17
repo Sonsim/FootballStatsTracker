@@ -48,6 +48,7 @@
                   Width="255"
                   BorderThickness="0,0,0,1"
                   HorizontalAlignment="Left"
+                  Name="usernameInput"
                   Text=""/>
                 <TextBlock Text="Passord" 
                    Grid.Row="2"
@@ -56,6 +57,7 @@
                    Name="Password"/>
                 <PasswordBox Grid.Row="3"
                       Password=""
+                      Name="passwordInput"
                       Padding="0,5"                           
                       Width="255"
                       BorderThickness="0,0,0,1"
