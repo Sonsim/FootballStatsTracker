@@ -3,6 +3,7 @@ using System.Linq;
 using System.Diagnostics;
 using FootballStatsTrackerAPI.Data;
 using FootballStatsTrackerAPI.Model;
+using FootballStatsTrackerAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,12 +14,12 @@ namespace FootballStatsTrackerAPI.Controllers
     public class UserController : Controller
     {
         private readonly AppDbContext _dbContext;
-        private readonly ILogger<UserController> _logger;
+        private readonly IUserService _userService;
 
-        public UserController(AppDbContext dbContext, ILogger<UserController> logger)
+        public UserController(AppDbContext dbContext, IUserService userService)
         {
             _dbContext = dbContext;
-            _logger = logger;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -28,6 +29,20 @@ namespace FootballStatsTrackerAPI.Controllers
             return _dbContext.teams.ToList();
         }
 
+        [HttpGet]
+        public async Task<ActionResult<User>> LoginUser([FromQuery] string username, [FromQuery] string password)
+        {
+            var user = await _userService.GetUsernameAndPasswordAsync(username, password);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return user;
+            }
+        }
 
         [HttpGet("{username}")]
         public ActionResult<User> GetUserByName(string username)
@@ -49,7 +64,7 @@ namespace FootballStatsTrackerAPI.Controllers
             
             _dbContext.users.Add(user);
             _dbContext.SaveChanges();
-            return CreatedAtAction(nameof(GetUserByName), new { username = user.username, team=user.team, passwordhash= user.passwordhash }, user);
+            return CreatedAtAction(nameof(GetUserByName), new { username = user.username, team=user.team, passwordhash= user.passwordhash, salt=user.salt}, user);
         }
 
         [HttpPut("{id}")]

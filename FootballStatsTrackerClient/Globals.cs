@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using FootballStatsTrackerClient.Model;
 using System.Security.Cryptography;
+using System.Windows.Data;
 
 namespace FootballStatsTrackerClient
 {
@@ -46,18 +47,28 @@ namespace FootballStatsTrackerClient
             }
         }
 
+        public static void GenerateSaltedhash(string password, out string hash, out string salt)
+        {
+            var saltBytes = new byte[64];
+            var provider = new RNGCryptoServiceProvider();
+            provider.GetNonZeroBytes(saltBytes);
+            salt = Convert.ToBase64String(saltBytes);
+
+            var rfc2989DerivedBytes = new Rfc2898DeriveBytes(password, saltBytes, 10000);
+            hash = Convert.ToBase64String(rfc2989DerivedBytes.GetBytes(256));
+        }
         public static string HashPassword(string password, byte[] salt)
         {
             using (var algorithm = new Rfc2898DeriveBytes(password, salt, 10000))
             {
-                byte[] hash = algorithm.GetBytes(32);
+                byte[] hash = algorithm.GetBytes(64);
                 return Convert.ToBase64String(hash);
             }
         }
 
         public static byte[] GenerateSalt()
         {
-            byte[] salt = new byte[16];
+            byte[] salt = new byte[64];
             using (var rng = new RNGCryptoServiceProvider())
             {
                 rng.GetNonZeroBytes(salt);

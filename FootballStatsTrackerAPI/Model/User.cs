@@ -12,6 +12,7 @@ namespace FootballStatsTrackerAPI.Model
         public string team { get; set; }
         [Required]
         public string passwordhash { get;  set; }
+        public string salt { get; set; }
 
     }
 }

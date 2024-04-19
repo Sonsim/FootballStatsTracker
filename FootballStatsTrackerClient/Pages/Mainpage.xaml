@@ -14,19 +14,43 @@
     <Grid.RowDefinitions>
         <RowDefinition Height="*" />
         <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Grid.Row="0"
-               Text="Hei"/>
+               Text="Velkommen"
+               FontSize="30"/>
     <Button 
-            Content="Endre farger" 
+            Content="Hjemme" 
+            x:Name="Button1"
             Grid.Row="1"
-            Foreground="{Binding awaysecondcolor}"
-            Background="{Binding awaymaincolor}"
+            Foreground="{Binding homemaincolor}"
+            Background="{Binding homesecondcolor}"
             Height="35"
             Width="150"
             Margin="0,5,0,0"
-            Click="AlterTheme_Click"> </Button>
+            Click="HomeTheme_Click"> </Button>
+    <Button 
+        Content="Borte" 
+        Grid.Row="2"
+        x:Name="Button2"
+        Foreground="{Binding homemaincolor}"
+        Background="{Binding homesecondcolor}"
+        Height="35"
+        Width="150"
+        Margin="0,5,0,0"
+        Click="AwayTheme_Click"></Button>
+        <Button 
+        Content="Logg ut" 
+        Grid.Row="3"
+        x:Name="Button3"
+        Foreground="{Binding homemaincolor}"
+        Background="{Binding homesecondcolor}"
+        Height="35"
+        Width="150"
+        Margin="0,5,0,0"
+        Click="LoggOffbtn_Click"></Button>
     </Grid>
 </Page>
