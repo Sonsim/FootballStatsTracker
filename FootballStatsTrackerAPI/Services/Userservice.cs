@@ -17,5 +17,10 @@ namespace FootballStatsTrackerAPI.Services
             return await _dbContext.users.FirstOrDefaultAsync(u =>
                 u.username == username && u.passwordhash == password);
         }
+
+        public async Task<IQueryable<User>> GetUsernameAsync(string username)
+        {
+            return  _dbContext.users.Where(u => u.username == username);
+        }
     }
 }

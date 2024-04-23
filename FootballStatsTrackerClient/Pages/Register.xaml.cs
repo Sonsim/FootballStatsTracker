@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using FootballStatsTrackerClient.Model;
 using FootballStatsTrackerClient;
+using static System.Net.WebRequestMethods;
 
 
 namespace FootballStatsTrackerClient.Pages
@@ -52,39 +53,67 @@ namespace FootballStatsTrackerClient.Pages
             return null;
         }
 
-        
-         private async void RegisterBtn_Click(Object sender, RoutedEventArgs e)
-         {
-            if (Register_Password.Password != Repeat_Password.Password || Register_Username.Text.Length == 0)
+        private async Task<bool> UsernameCheck(string username)
+        {
+            bool result;
+            HttpClient client = new HttpClient();
+            var url = "https://localhost:7137/api/User/checkusername?username=" + username;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
             {
-                errorMessage.Text = "Sjekk brukernavn og passord";
+                var content = await response.Content.ReadAsStringAsync();
+                result = JsonSerializer.Deserialize<bool>(content);
+
+                return result;
             }
             else
             {
-                string username = Register_Username.Text;
-                string teamname = ((Team)listBoxTeams.SelectedItem).teamname;
-                string passwordtext = Register_Password.Password;
-                string Salt;
-                string password;
-
-                Globals.GenerateSaltedhash(passwordtext, out password, out Salt);
-                Team club = GetTeam();
-                if (Register_Password.Password.Length == 0)
-                {
-                    errorMessage.Text = "Skriv et passord";
-
-                }
-                else if (Register_Password.Password != Repeat_Password.Password)
-                {
-                    errorMessage.Text = "Passordet matcher ikke";
-
-                }
-                else
-                {
-                    await RegisterUserInDatabase(username, teamname, password, Salt);
-                }
-
+                result = false;
+                return result;
             }
+        }
+        
+         private async void RegisterBtn_Click(Object sender, RoutedEventArgs e)
+         {
+             var usernamecheck = await UsernameCheck(Register_Username.Text);
+
+             if (usernamecheck)
+             {
+                 if (Register_Password.Password != Repeat_Password.Password || Register_Username.Text.Length == 0)
+                 {
+                     errorMessage.Text = "Sjekk brukernavn og passord";
+                 }
+                 else
+                 {
+                     string username = Register_Username.Text;
+                     string teamname = ((Team)listBoxTeams.SelectedItem).teamname;
+                     string passwordtext = Register_Password.Password;
+                     string Salt;
+                     string password;
+                     Globals.GenerateSaltedhash(passwordtext, out password, out Salt);
+                     Team club = GetTeam();
+                     if (Register_Password.Password.Length == 0)
+                     {
+                         errorMessage.Text = "Skriv et passord";
+
+                     }
+                     else if (Register_Password.Password != Repeat_Password.Password)
+                     {
+                         errorMessage.Text = "Passordet matcher ikke";
+
+                     }
+                     else
+                     {
+                         await RegisterUserInDatabase(username, teamname, password, Salt);
+                     }
+
+                 }
+             }
+             else
+             {
+                 errorMessage.Text = "Brukernavn er opptatt";
+             }
          }
 
          private async Task RegisterUserInDatabase(string username, string teamname, string password, string Salt)

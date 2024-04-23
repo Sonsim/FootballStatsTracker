@@ -29,6 +29,18 @@ namespace FootballStatsTrackerAPI.Controllers
             return _dbContext.teams.ToList();
         }
 
+        [HttpGet("checkusername")]
+        public async Task<bool> CheckUsername(string username)
+        {
+            var result = await _userService.GetUsernameAsync(username);
+
+            if (result == null || result.Count() < 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
         [HttpGet]
         public async Task<ActionResult<User>> LoginUser([FromQuery] string username, [FromQuery] string password)
         {
