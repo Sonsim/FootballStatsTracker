@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballStatsTrackerClient.Model;
+using FootballStatsTrackerClient.Viewmodel;
 
 
 namespace FootballStatsTrackerClient.Pages
@@ -25,70 +26,52 @@ namespace FootballStatsTrackerClient.Pages
     /// </summary>
     public partial class Mainpage : Page
     {
-        public User LoggedIn { get; set; }
-        public Team LoggedTeam { get; set; }
-        private bool _home;
-        private bool _away;
+        private MainpageViewModel viewModel;
 
         public Mainpage()
         {
-            GetTheme();
             InitializeComponent();
-        }
-        
-        private  void GetTheme()
-        {
-            LoggedIn = Globals.LoggedInUser;
-
-           foreach (var team in Globals.teamsList)
-           {
-               if (team.teamname.ToLower() == LoggedIn.team.ToLower())
-               {
-                   LoggedTeam = team;
-                   DataContext = team;
-               }
-           }
+            viewModel = new MainpageViewModel();
+            DataContext = viewModel;
         }
 
-        public void AwayTheme_Click(object sender, RoutedEventArgs e)
+        private void AwayTheme_Click(object sender, RoutedEventArgs e)
         {
             var converter = new BrushConverter();
-            
-                this.Background = (Brush)converter.ConvertFromString(LoggedTeam.awaymaincolor);
-                this.Foreground = (Brush)converter.ConvertFromString(LoggedTeam.awaysecondcolor);
+            Background = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.awaymaincolor);
+            Foreground = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.awaysecondcolor);
 
-                Button1.Background = (Brush)converter.ConvertFromString(LoggedTeam.awaysecondcolor);
-                Button1.Foreground = (Brush)converter.ConvertFromString(LoggedTeam.awaymaincolor);
+            Home_Btn.Background = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.awaysecondcolor);
+            Home_Btn.Foreground = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.awaymaincolor);
+            Away_Btn.Foreground = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.awaymaincolor);
+            Away_Btn.Background = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.awaysecondcolor);
 
-                Button2.Background = (Brush)converter.ConvertFromString(LoggedTeam.awaysecondcolor);
-                Button2.Foreground = (Brush)converter.ConvertFromString(LoggedTeam.awaymaincolor);
+            LoggOff_Btn.Background = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.awaysecondcolor);
+            LoggOff_Btn.Foreground = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.awaymaincolor);
 
-                Button3.Background = (Brush)converter.ConvertFromString(LoggedTeam.awaysecondcolor);
-                Button3.Foreground = (Brush)converter.ConvertFromString(LoggedTeam.awaymaincolor);
         }
 
-        public void HomeTheme_Click(object sender, RoutedEventArgs e)
+        private void HomeTheme_Click(object sender, RoutedEventArgs e)
         {
             var converter = new BrushConverter();
-            this.Background = (Brush)converter.ConvertFromString(LoggedTeam.homemaincolor);
-            this.Foreground = (Brush)converter.ConvertFromString(LoggedTeam.homesecondcolor);
+            Background = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.homemaincolor);
+            Foreground = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.homesecondcolor);
 
-            Button1.Background = (Brush)converter.ConvertFromString(LoggedTeam.homesecondcolor);
-            Button1.Foreground = (Brush)converter.ConvertFromString(LoggedTeam.homemaincolor);
+            Home_Btn.Background = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.homesecondcolor);
+            Home_Btn.Foreground = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.homemaincolor);
+            Away_Btn.Background = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.homesecondcolor);
+            Away_Btn.Foreground = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.homemaincolor);
 
-            Button2.Background = (Brush)converter.ConvertFromString(LoggedTeam.homesecondcolor);
-            Button2.Foreground = (Brush)converter.ConvertFromString(LoggedTeam.homemaincolor);
-
-            Button3.Background = (Brush)converter.ConvertFromString(LoggedTeam.homesecondcolor);
-            Button3.Foreground = (Brush)converter.ConvertFromString(LoggedTeam.homemaincolor);
+            LoggOff_Btn.Background = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.homesecondcolor);
+            LoggOff_Btn.Foreground = (Brush)converter.ConvertFromString(viewModel.LoggedTeam.homemaincolor);
         }
 
-        public void LoggOffbtn_Click(object sender, RoutedEventArgs e)
+        private void LogOffbtn_Click(object sender, RoutedEventArgs e)
         {
             Globals.LoggedInUser = null;
             NavigationService.Navigate(new Login());
         }
-
-
     }
+
+
 }

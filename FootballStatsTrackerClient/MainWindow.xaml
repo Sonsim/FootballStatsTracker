@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootballStatsTrackerClient"
         mc:Ignorable="d"
-        Title="Eliteserien Stat Tracker" Height="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}" Width="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
+        Title="Eliteserien Stat Tracker" d:DesignHeight="450" d:DesignWidth="800"
+        >
     <Grid>
-        <Frame x:Name="Main"/>
+        <Frame x:Name="Main"  NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

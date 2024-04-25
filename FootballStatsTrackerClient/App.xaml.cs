@@ -16,7 +16,8 @@ namespace FootballStatsTrackerClient
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
+            MainWindow = new MainWindow();
+            MainWindow.Show();
             Globals.FillList();
         }
     }

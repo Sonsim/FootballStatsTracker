@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballStatsTrackerClient.Model;
+using FootballStatsTrackerClient.Pages;
 
 namespace FootballStatsTrackerClient
 {
@@ -23,8 +24,8 @@ namespace FootballStatsTrackerClient
     {
         public MainWindow()
         {
-           
             InitializeComponent();
+            Main.Navigate(new Uri("Pages/Login.xaml", UriKind.Relative));
         }
     }
 }

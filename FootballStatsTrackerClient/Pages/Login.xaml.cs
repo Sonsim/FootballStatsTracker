@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballStatsTrackerClient.Model;
 using static System.Net.WebRequestMethods;
+using FootballStatsTrackerClient;
 
 namespace FootballStatsTrackerClient.Pages
 {

@@ -3,16 +3,16 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FootballStatsTrackerClient.Pages"
-      xmlns:user="clr-namespace.FootballStatsTrackerClient.Globals"
       mc:Ignorable="d" 
+      Background="{Binding LoggedTeam.homemaincolor}"
+      Foreground="{Binding LoggedTeam.homesecondcolor}"
       d:DesignHeight="450" d:DesignWidth="800"
-      Background="{Binding homemaincolor}"
-      Foreground="{Binding homesecondcolor}"
+     
       Title="Hovedside">
 <Grid>
     <Grid.RowDefinitions>
         <RowDefinition Height="*" />
+        <RowDefinition Height="*"/>
         <RowDefinition Height="*" />
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
@@ -20,37 +20,131 @@
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Grid.Row="0"
-               Text="Velkommen"
-               FontSize="30"/>
+               Text="Velkommen!"
+               
+               FontSize="30"></TextBlock>
+  
+    <Grid Grid.Row="1"
+          Width="600">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                   />
+        <TextBlock Grid.Row="0" Grid.Column="1"
+        />
+        <TextBlock Grid.Row="0" Grid.Column="2"
+                   HorizontalAlignment="Center"
+                   
+        Text="Spilt"/>
+        <TextBlock Grid.Row="0" Grid.Column="3"
+                   HorizontalAlignment="Center"
+        Text="Vunnet"/>
+        <TextBlock Grid.Row="0" Grid.Column="4"
+                   HorizontalAlignment="Center"
+                   Text="Uavgjort"/>
+        <TextBlock Grid.Row="0" Grid.Column="5"
+                   HorizontalAlignment="Center"
+                   Text="Tap"/>
+        <TextBlock Grid.Row="0" Grid.Column="6"
+                   HorizontalAlignment="Center"
+                   Text="+"/>
+        <TextBlock Grid.Row="0" Grid.Column="7"
+                   HorizontalAlignment="Center"
+                   Text="-"/>
+        <TextBlock Grid.Row="0" Grid.Column="8"
+                   HorizontalAlignment="Center"
+                   Text="+/-"/>
+        <TextBlock Grid.Row="0" Grid.Column="9"
+                   HorizontalAlignment="Center"
+                   Text="Poeng"/>
+        <TextBlock Grid.Row="1" Grid.Column="0"
+
+                   HorizontalAlignment="Center"
+                   Text="1"/>
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   HorizontalAlignment="Center"
+                   Text="Bodø/Glimt"/>
+        <TextBlock Grid.Row="1" Grid.Column="2"
+                   HorizontalAlignment="Center"
+                   Text="4"/>
+        <TextBlock Grid.Row="1" Grid.Column="3"
+                   HorizontalAlignment="Center"
+                   Text="3"/>
+        <TextBlock Grid.Row="1" Grid.Column="4"
+                   HorizontalAlignment="Center"
+                   Text="1"/>
+        <TextBlock Grid.Row="1" Grid.Column="5"
+                   HorizontalAlignment="Center"
+                   Text="0"/>
+        <TextBlock Grid.Row="1" Grid.Column="6"
+                   HorizontalAlignment="Center"
+                   Text="9"/>
+        <TextBlock Grid.Row="1" Grid.Column="7"
+                   HorizontalAlignment="Center"
+                   Text="1"/>
+        <TextBlock Grid.Row="1" Grid.Column="8"
+                   HorizontalAlignment="Center"
+                   Text="8"/>
+        <TextBlock Grid.Row="1" Grid.Column="9"
+                   HorizontalAlignment="Center"
+                   Text="10"/>
+        </Grid>
+
     <Button 
-            Content="Hjemme" 
-            x:Name="Button1"
-            Grid.Row="1"
-            Foreground="{Binding homemaincolor}"
-            Background="{Binding homesecondcolor}"
+            Content="Hjemme"
+            Grid.Row="2"
             Height="35"
             Width="150"
-            Margin="0,5,0,0"
+            Background="{Binding LoggedTeam.homesecondcolor}"
+            Foreground="{Binding LoggedTeam.homemaincolor}"
+            x:Name="Home_Btn"
             Click="HomeTheme_Click"> </Button>
     <Button 
         Content="Borte" 
-        Grid.Row="2"
-        x:Name="Button2"
-        Foreground="{Binding homemaincolor}"
-        Background="{Binding homesecondcolor}"
+        Grid.Row="3"
         Height="35"
         Width="150"
-        Margin="0,5,0,0"
+        x:Name="Away_Btn"
+        Background="{Binding LoggedTeam.homesecondcolor}"
+        Foreground="{Binding LoggedTeam.homemaincolor}"
         Click="AwayTheme_Click"></Button>
         <Button 
         Content="Logg ut" 
-        Grid.Row="3"
-        x:Name="Button3"
-        Foreground="{Binding homemaincolor}"
-        Background="{Binding homesecondcolor}"
+        Grid.Row="4"
         Height="35"
         Width="150"
-        Margin="0,5,0,0"
-        Click="LoggOffbtn_Click"></Button>
+        x:Name="LoggOff_Btn"
+        Background="{Binding LoggedTeam.homesecondcolor}"
+        Foreground="{Binding LoggedTeam.homemaincolor}"
+        Click="LogOffbtn_Click"></Button>
     </Grid>
 </Page>
